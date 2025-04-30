@@ -87,7 +87,7 @@ A estrutura do projeto a seguir:
 ├── docker/                   # Arquivos de configuração do Docker
 │   └── config_amb            # Configurações do ambiente de execução
 │   └── schema_db.txt         # Descreve a estrutura do banco de dados
-│   └── brand               # Imagem (png) a ser exibida na apresentação do terminal
+│   └── brand                 # Imagem (png) a ser exibida na apresentação do terminal
 ├── imports/                  # Contém os arquivos de dados para importação
 ├── app/                      # Diretório de execução do processo ETL (abriga os scripts)
 │   └── etl.py                # Script principal responsável pela manipulação dos dados
