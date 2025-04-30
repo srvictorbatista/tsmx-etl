@@ -44,12 +44,12 @@ Este projeto usa o Docker para executar o banco de dados PostgreSQL, suas depend
 Uma vez executado. Ele reunirá as partes necessárias, montará e configurará um ambiente completo para execução deste projeto.
 
 #### ``Em Windows:`` 
-Bata executar o arquivo "BASHEXEC.CMD"
+Basta executar o arquivo "BASHEXEC.CMD"
 A seguir, todo o processo se dará automaticamente. Até surgir um terminal consideravelmente maior, com a logo da TSMX, informando os serviços ativos.
 <br>&nbsp; 
 
 #### ``Em demais plataformas.`` 
-Bata executar dois comandos em seu terminal:
+Basta executar dois comandos em seu terminal:
 1º Gera ambiente docker a partir do "docker-compose.yml":
 ```bash
 docker-compose up --build
