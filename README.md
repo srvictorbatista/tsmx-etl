@@ -157,7 +157,7 @@ def normalizar_dataframe(df):
  
   
 Tão curta, que há quem passe pelo código se perguntando **"_... mas onde está a limpeza e tratamento dos dados?_"** 
-Por isso, não se engane: _Apesar de curta. esta função faz tantos tratamentos, que achei por bem. Dividir sua explicação em **4 sub-etapas**. As quais, que veremos a seguir._
+Por isso, não se engane: _Apesar de curta. esta função faz tantos tratamentos, que achei por bem. Dividir sua explicação em **4 sub-etapas**. As quais, veremos a seguir._
  <br>&nbsp;
 ****************************
 ### Sub-etapas da Função ```normalizar_dataframe```
