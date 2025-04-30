@@ -216,7 +216,7 @@ CREATE TABLE tbl_nominees (
 
 ## Execução do Script
 
-Para executar o processo ETL, basta rodar o script `etl.py`. Conforme já informado em **[no terminal (BASH)](#No-terminal-bash)**
+Para executar o processo ETL, basta rodar o script `etl.py`. Conforme já informado em **[No terminal (BASH)](#No-terminal-bash)**
 
 ## Auditoria e Logs
 
