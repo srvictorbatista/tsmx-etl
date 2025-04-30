@@ -61,7 +61,7 @@ docker exec -it tsmx_etl bash
 <br>&nbsp; <br>&nbsp;
 ### No terminal (BASH)
 -----
-Usa vez diante do terminal do container \tsmx_etl\ execute:
+Uma vez diante do terminal do container \tsmx_etl\ execute:
 ```bash
 ETL
 ```
