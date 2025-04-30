@@ -1,4 +1,5 @@
 
+
 # !TSMX-ETL Documentação
 
 ## Visão Geral
@@ -122,10 +123,27 @@ A função `carregar_arquivo()` usa a biblioteca `pandas` para importar os dados
 
 A função `visualizar_arquivo()` permite ao usuário visualizar as primeiras linhas do arquivo para conferência, facilitando a validação do conteúdo antes do processamento completo.
 
+
 ### 4. Normalização e limpeza dos Dados
 
+#### Função `normalizar_dataframe`
+Esta função tem como objetivo **normalizar, limpar e padronizar** um `DataFrame` do `pandas`.
 A função `normalizar_dataframe()` realiza várias tarefas para garantir que os dados sejam consistentes e prontos para inserção no banco de dados:
 
+```python
+def normalizar_dataframe(df):
+    df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
+    for col in ['note', 'detail', 'nominees', 'name', 'movie', 'category', 'class']:
+        if col in df.columns:
+            df[col] = df[col].fillna("").astype(str).str.strip()
+    df['winner'] = df['winner'].fillna(False)
+    df['winner'] = df['winner'].apply(lambda x: str(x).strip().lower() in ['true', '1', 'yes'])
+    obrigatorias = ["ceremony", "year", "class", "category", "movie", "winner"]
+    for col in obrigatorias:
+        if col not in df.columns:
+            raise Exception(f"🛑 Coluna obrigatória ausente: {col}")
+    return df
+```
 - Normaliza os nomes das colunas para o formato `snake_case`.
 - Remove espaços em branco e valores nulos.
 - Converte campos booleanos (como o campo `winner`) para `True` ou `False`.
@@ -136,6 +154,89 @@ A função `normalizar_dataframe()` realiza várias tarefas para garantir que os
   - `category`
   - `movie`
   - `winner`
+ 
+  
+Tão curta, que há quem passe pelo código se perguntando **"_... mas onde está a limpeza e tratamento dos dados?_"** 
+Por isso, não se engane: _Apesar de curta. esta função faz tantos tratamentos, que achei por bem. Dividir sua explicação em **4 sub-etapas**. As quais, que veremos a seguir._
+ <br>&nbsp;
+****************************
+### Sub-etapas da Função ```normalizar_dataframe```
+
+#### 4.1. Normalização dos nomes das colunas
+
+-   Remove espaços em branco no início e fim de cada nome de coluna (`strip()`).
+    
+-   Converte todas as letras para minúsculas (`lower()`).
+    
+-   Substitui espaços por underscores (`_`), garantindo nomes de colunas compatíveis com boas práticas de manipulação de dados.
+    
+
+#### 4.2. Limpeza de colunas específicas
+
+```python
+for col in ['note', 'detail', 'nominees', 'name', 'movie', 'category', 'class']:
+    if col in df.columns:
+        df[col] = df[col].fillna("").astype(str).str.strip()
+
+```
+
+-   Para colunas específicas (se existirem), substitui valores nulos por strings vazias.
+    
+-   Garante que os dados nessas colunas sejam do tipo string.
+    
+-   Remove espaços em branco nas extremidades dos textos. Algo similar ao ``tim()`` em outras linguagens.
+    
+
+#### 4.3. Padronização da coluna `winner`
+
+```python
+df['winner'] = df['winner'].fillna(False)
+df['winner'] = df['winner'].apply(lambda x: str(x).strip().lower() in ['true', '1', 'yes'])
+
+```
+
+-   Preenche valores nulos da coluna `winner` com `False`.
+    
+-   Converte os valores da coluna para string, remove espaços e transforma em minúsculo.
+    
+-   Interpreta como `True` os valores que correspondem a `'true'`, `'1'` ou `'yes'`.
+    
+-   Todo o resto será interpretado como `False`.
+    
+
+#### 4.4. Validação de colunas obrigatórias
+
+```python
+obrigatorias = ["ceremony", "year", "class", "category", "movie", "winner"]
+for col in obrigatorias:
+    if col not in df.columns:
+        raise Exception(f"🛑 Coluna obrigatória ausente: {col}")
+```
+
+-   Define uma lista de colunas obrigatórias.
+    
+-   Verifica se cada uma dessas colunas está presente no `DataFrame`.
+    
+-   Caso alguma coluna esteja ausente, lança uma exceção indicando qual coluna está faltando.
+    
+
+----------
+
+#### Observações
+
+-   Apesar de curta. Esta função é robusta contra ausência de colunas, mas exigente com relação às colunas obrigatórias. O que exigirá atenção extra, durante modificações futuras deste projeto. Dado seu poder de atuação neste projeto.
+    
+-   Ela assume que a coluna `winner` pode vir com diferentes formatos booleanos (`True`, `1`, `yes`, etc.) e trata isso de forma prática.
+    
+-   A limpeza de texto evita problemas comuns em análises de dados, como duplicações ou agrupamentos errados causados por espaços em branco ou variações de maiúsculas/minúsculas.
+
+- Possui uma implementação extremamente curta, prática e (modéstia a parte), elegante. Diante de alternativas com a mesma finalidade.
+
+- Resumidamente: É baixinha, mas invocada! **_Por tanto, não menospreze seu tamanho..._** 
+Dedique a ela, o respeito e atenção que ela merece.
+
+****************************
+ <br>&nbsp;
 
 ### 5. Inserção no Banco de Dados
 
