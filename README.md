@@ -184,7 +184,7 @@ for col in ['note', 'detail', 'nominees', 'name', 'movie', 'category', 'class']:
     
 -   Garante que os dados nessas colunas sejam do tipo string.
     
--   Remove espaços em branco nas extremidades dos textos. Algo similar ao ``tim()`` em outras linguagens.
+-   Remove espaços em branco nas extremidades dos textos. Algo similar ao ``trim()`` em outras linguagens.
     
 
 #### 4.3. Padronização da coluna `winner`
