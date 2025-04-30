@@ -1,0 +1,95 @@
+FROM postgres:16
+
+
+# Estabelece a identificação inicial deste serviço
+#RUN echo -e "\n\nclear \n echo -ne '\033[1;37;45m Servidor Postgres:Adminer \033[0m - ' && (grep -E '^NAME|^VERSION_ID' /etc/os-release | awk -F= '{print \$2}' | tr -d '\"' | tr '\n' ' ' | sed 's/ *\$//') && echo -e \"\\nPostgres: \$(psql --version | awk '{print \$3}') | Python: \$(python --version | awk '{print \$2}')\n\n\"" >> /root/.bashrc
+
+# Estabelece a identificação inicial deste serviço
+#RUN echo -e "\nclear\ncatimg /BRAND.png\necho -ne '\033[1;37;45m Servidor Postgres:Adminer \033[0m - ' && (grep -E '^NAME|^VERSION_ID' /etc/os-release | awk -F= '{print \$2}' | tr -d '\"' | tr '\n' ' ' | sed 's/ *\$//') && echo -e \"\nPostgres: \$(psql --version | awk '{print \$3}') | Python: \$(python --version | awk '{print \$2}')\n\n\"\n" >> /root/.bashrc
+
+# Estabelece a identificação inicial deste serviço
+RUN echo -e "\nclear\ncatimg /BRAND.png\necho -ne '\033[1;37;45m Servidor Postgres:Adminer \033[0m - ' && (grep -E '^NAME|^VERSION_ID' /etc/os-release | awk -F= '{print \$2}' | tr -d '\"' | tr '\n' ' ' | sed 's/ *\$//') && echo -e \"\033[90m\nPostgres: \$(psql --version | awk '{print \$3}') | Python: \$(python --version | awk '{print \$2}')\033[0m\n\n\"\n" >> /root/.bashrc
+
+
+# Monta brand
+COPY docker/brand /BRAND.png
+
+# Fixa fuso-horario com TZ-DATA
+RUN apt-get update && apt-get install -y tzdata && ln -sf /usr/share/zoneinfo/America/Belem /etc/localtime && echo "America/Belem" > /etc/timezone
+
+
+
+
+# Instala dependências e conf ambiente
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl catimg nano \
+    libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev \
+    ca-certificates git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar pyenv
+RUN curl https://pyenv.run | bash
+
+# Configurar pyenv
+ENV PYENV_ROOT="/root/.pyenv"
+ENV PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+
+# Instala Python 3.10.11 com pandas, pyspark e psycopg2-binary com o pip atualizado e usando pyenv
+RUN apt-get update && apt-get install -y llvm && \
+    /root/.pyenv/bin/pyenv install 3.10.11 && \
+    /root/.pyenv/bin/pyenv global 3.10.11 && \
+    /root/.pyenv/versions/3.10.11/bin/pip install --upgrade pip && \
+    /root/.pyenv/versions/3.10.11/bin/pip install pandas pyspark psycopg2-binary openpyxl xlrd
+
+# Cria um alias 'py' apontando para o executável do python
+RUN ln -s /usr/local/bin/python /usr/local/bin/py
+
+# Cria links simbólicos para o script no PATH
+RUN ln -s /app/etl.py /usr/local/bin/etl && \
+    ln -s /app/etl.py /usr/local/bin/ETL
+
+
+# Copia o schema
+COPY docker/schema_db.txt /docker-entrypoint-initdb.d/schema.sql
+
+
+
+
+
+
+# Diretório de trabalho
+WORKDIR /app
+
+# Limpa a pasta /app (apenas por precaução)
+RUN rm -rf /app/*
+
+# Copia (prepara) arquivos para sincronização
+COPY ./app/ /app/
+
+# Concede permissão recursiva às pastas /app e /imports
+RUN mkdir -p /imports && chmod -R 777 /app /imports
+
+
+
+# Adminer (SGBD GUI-WEB para dar mais independencia ao ambiente)
+RUN apt-get update && \
+    apt-get install -y apache2 php libapache2-mod-php \
+    php-pgsql php-mysql php-sqlite3 php-mbstring php-xml php-curl php-zip php-gd php-intl php-bcmath php-common && \
+    apt-get clean
+
+# Limpa a pasta padrão do Apache
+RUN rm -rf /var/www/html/*
+
+# Copia os arquivos do Adminer
+COPY ./adminer /var/www/html
+
+# Permissões (opcional, se necessário)
+RUN chown -R www-data:www-data /var/www/html
+
+# Expõe a porta 80
+EXPOSE 80
+
+# Inicia serviços
+#CMD service apache2 start & exec docker-entrypoint.sh postgres
+CMD exec docker-entrypoint.sh postgres & service apache2 start & wait

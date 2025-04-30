@@ -1,0 +1,32 @@
+
+
+
+services: 
+  postgres:
+    container_name: etl_tsmx
+    build: 
+      context: .
+      dockerfile: ./docker/config_amb
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: etl_tsmx
+    volumes:
+      - db_postgres_data:/var/lib/postgresql/data
+      - ./adminer:/var/www/html
+      - ./app:/app
+      - ./imports:/imports
+    ports:
+      - "5432:5432"
+      - "5433:80" # Adminer
+    networks:
+      - hosting
+
+volumes:
+  db_postgres_data:
+
+networks:
+  hosting:
+    driver: bridge
+    name: hosting
