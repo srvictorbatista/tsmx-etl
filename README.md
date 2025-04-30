@@ -216,7 +216,7 @@ CREATE TABLE tbl_nominees (
 
 ## Execução do Script
 
-Para executar o processo ETL, basta rodar o script `etl.py`. Conforme já informado em [b][no terminal (BASH)](#no-terminal-bash)[/b]
+Para executar o processo ETL, basta rodar o script `etl.py`. Conforme já informado em **[no terminal (BASH)](#no-terminal-bash)**
 
 ## Auditoria e Logs
 
@@ -228,7 +228,7 @@ Todos os arquivos processados são copiados para o diretório `backups/`. Caso o
 
 
 Este log pode ser consultado logo após o processamento ou posteriormente, acessando a pasta de backups.
-veja detalhes sobre, em [b][tratamento de erros](#6-tratamento-de-erros)[/b]
+veja detalhes sobre, em **[tratamento de erros](#6-tratamento-de-erros)**
 
 ## Extensão e Customização
 
@@ -261,7 +261,7 @@ O repositório contém:
 - Scripts auxiliares para configuração e montagem do ambiente de execução.
 - A estrutura de diretórios, arquivos, logs e demais dados podem ser revisitados em: **[estrutura do projeto](#estrutura-do-projeto)**
 
-[b]Uma vez atendendo aos requisitos deste projeto (Docker e Docker-compose). Este repositório deverá ser capaz de criar um ambiente completo e totalmente autônomo, para a execução do pipeline.[/b]
+**Uma vez atendendo aos requisitos deste projeto (Docker e Docker-compose). Este repositório deverá ser capaz de criar um ambiente completo e totalmente autônomo, para a execução do pipeline.**
 
 ## Objetivo do Projeto
 
