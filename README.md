@@ -61,7 +61,7 @@ docker exec -it tsmx_etl bash
 ```
 <br>
 
-#### Notas Adicionais
+### Notas Adicionais
 (*) **Gestor Web Gráfico (WEB-GUI)**: 
 
 Como item complementar (opcional) é erguido automaticamente, um **servidor [WEB-GUI](http://localhost:5433/)** para gestão do banco de dados **Postgres** de forma gráfica. Igualmentre personalizado para a **TSMX**.
