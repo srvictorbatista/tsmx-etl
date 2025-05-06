@@ -64,9 +64,9 @@ docker exec -it tsmx_etl bash
 ### Notas Adicionais
 (*) **Gestor Web Gráfico (WEB-GUI)**: 
 
-Como item complementar (opcional) é erguido automaticamente, um **servidor [WEB-GUI](http://localhost:5433/)** para gestão do banco de dados **Postgres** de forma gráfica, na porta 5433 do **host local**. Igualmentre personalizado para a **TSMX** em theme-dark.
+Como item complementar (opcional) é erguido automaticamente, um **servidor [WEB-GUI](http://localhost:5433/)** para gestão do banco de dados **Postgres** de forma gráfica, na porta **5433** do **host local**. Igualmentre personalizado para a **TSMX** em theme-dark.
 
-A interface mencionada acompanha um **lugin de auto-login** que pode ser configurado (opcionalmente) para realizar **login de forma automatica** ou realizar o preenchimento parcial das **credenciais de acesso**. 
+A interface mencionada acompanha um **plugin de auto-login** que pode ser configurado (opcionalmente) para realizar **login completo de forma automatica** ou realizar o preenchimento parcial das **credenciais de acesso**. 
 
 **Senha padrão:** 
 ```
