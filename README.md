@@ -77,6 +77,8 @@ python etl.py
 
 Em seguida lhe será pedido o nome e local, do arquivo de origem dos dados. Recomendo alojar seus arquivos na pasta "imports/" do projeto. O que corresponderá a "\imports\seu_arquivo.(CSV, XLS ou XLSX)" no terminal de importação.
 
+Como item complementar (opcional) é erguido automaticamente, um servidor [WEB-GUI](http://localhost:5433/) para gestão do banco de dados Postgres de forma gráfica. Igualmentre personalizado para a TSMX.
+<br> &nbsp; 
 
 ## Estrutura do Projeto
 
