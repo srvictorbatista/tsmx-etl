@@ -68,7 +68,7 @@ Como item complementar (opcional) é erguido automaticamente, um **servidor [WEB
 
 A interface mencionada acompanha um **lugin de auto-login** que pode ser configurado (opcionalmente) para realizar **login de forma automatica** ou realizar o preenchimento parcial das **credenciais de acesso**. 
 
-**Senha padrão:** ```postgres```
+**Senha padrão:** ````postgres````
 
 <br>&nbsp; <br>&nbsp;
 
