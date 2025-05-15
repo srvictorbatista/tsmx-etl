@@ -278,7 +278,7 @@ A adição do arquivo ``arquivos_complementares.zip`` contem arquivos adicionais
 ├── docker/                 				# Arquivos de configuração do Docker
 │     └── schema_db_complementar.sql      		# Descreve a estrutura já atualizada do banco de dados
 ├── imports/                          			# Contém os arquivos de dados para importação
-│     └── datasheet_oscars_complementar.csv 	    # Dados complementares a serem vinculados a nova estrutura
+│     └── datasheet_oscars_complementar.csv 	        # Dados complementares a serem vinculados a nova estrutura
 └── app/                              			# Diretório de execução do processo ETL (abriga os scripts)
 │     └── etl2.py                     			# Script ETL atualizado, responsável pela manipulação dos dados
 └── Diagrama ER Complementar.png       			# Diagrama esquemático ilustrando a atualização proposta
