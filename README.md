@@ -268,6 +268,7 @@ O repositório contém:
 O objetivo deste projeto é automatizar o processo de extração, transformação e carga (ETL) de dados, provenientes de arquivos `.csv`, `.xls` e `.xlsx`, para um banco de dados PostgreSQL relacional.
 Veja mais detalhes na seção **[Sobre !TSMX-ETL](#sobre-tsmx-etl)**
 <br>
+<BR> &nbsp; 
 
 ## 🚨 Update
 
