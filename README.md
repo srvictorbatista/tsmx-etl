@@ -270,7 +270,9 @@ Veja mais detalhes na seção **[Sobre !TSMX-ETL](#sobre-tsmx-etl)**
 <br>
 
 ## 🚨 Update
+
 Em 14-05-2025:
+
 A adição do arquivo ``arquivos_complementares.zip`` contem arquivos adicionais para um proposta (teste/atualização) adicional. Utilizando o mesmo ambiente.
 **Composição do arquivo compactado:**
 ```
